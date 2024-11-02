@@ -15,7 +15,7 @@ const Quote: React.FC = () => {
                         <FaPhoneAlt className="text-3xl bg-primary p-3 text-white rounded-full" />
                         <div className="ml-4">
                             <h6 className="text-lg text-gray-700">Need Assistance? Call Us!</h6>
-                            <h3 className="text-primary text-xl">+012 345 6789</h3>
+                            <h3 className="text-primary text-xl">+255 745 787 370</h3>
                         </div>
                     </div>
                 </div>
