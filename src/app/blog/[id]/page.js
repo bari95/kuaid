@@ -1,4 +1,4 @@
-// app/post/[id]/page.tsx
+// app/post/[id]/page.js
 
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
@@ -14,7 +14,7 @@ const dummyPosts = [
     author: {
       _id: 'author1',
       username: 'AuthorOne',
-      verified: 'true',
+      verified: true,
     },
     media: 'https://via.placeholder.com/400',
     createdAt: '2024-10-30T10:00:00Z',
@@ -30,7 +30,7 @@ const dummyPosts = [
     author: {
       _id: 'author2',
       username: 'AuthorTwo',
-      verified: 'false',
+      verified: false,
     },
     media: '',
     createdAt: '2024-10-31T12:30:00Z',
@@ -46,7 +46,7 @@ const dummyPosts = [
     author: {
       _id: 'author3',
       username: 'AuthorThree',
-      verified: 'true',
+      verified: true,
     },
     media: 'https://via.placeholder.com/400',
     createdAt: '2024-11-01T14:00:00Z',
@@ -57,12 +57,7 @@ const dummyPosts = [
   },
 ];
 
-// Generate dynamic metadata for each post
-export async function generateMetadata({
-  params,
-}: {
-  params: { id: string };
-}): Promise<Metadata> {
+export async function generateMetadata({ params }) {
   const { id } = params;
   const post = dummyPosts.find((p) => p._id === id);
 
@@ -79,7 +74,7 @@ export async function generateMetadata({
     openGraph: {
       title: post.title || 'Kuaid Post',
       description: post.content || 'Read the latest post on Kuaid.',
-      images: [post.media || 'https://kuaid.com/images/logo.jpg'],
+      images: [{ url: post.media || 'https://kuaid.com/images/logo.jpg' }],
       url: `https://kuaid.com/blog/${id}`,
       siteName: 'Kuaid',
       type: 'article',
@@ -99,7 +94,7 @@ export async function generateMetadata({
 }
 
 // Server Component
-const PostViewer = async ({ params }: { params: { id: string } }) => {
+const PostViewer = async ({ params }) => {
   const { id } = params;
   const post = dummyPosts.find((p) => p._id === id);
 
@@ -110,26 +105,28 @@ const PostViewer = async ({ params }: { params: { id: string } }) => {
   return (
     <>
       <Header />
-     <div className="max-w-2xl mx-auto p-4 pt-20">
-      
-      <h2 className="text-4xl font-semibold text-gray-900">{post.title}</h2>
-      {post.media && (
-        <img
-          src={post.media}
-          alt={post.title}
-          className="my-4 w-full h-auto rounded-lg shadow-md"
+      <div className="max-w-2xl mx-auto p-4 pt-20">
+        <h2 className="text-4xl font-semibold text-gray-900">{post.title}</h2>
+        {post.media && (
+          <img
+            src={post.media}
+            alt={post.title}
+            className="my-4 w-full h-auto rounded-lg shadow-md"
+          />
+        )}
+        <div
+          className="text-gray-700 text-lg leading-relaxed my-4"
+          dangerouslySetInnerHTML={{ __html: post.content }}
         />
-      )}
-      <div className="text-gray-700 text-lg leading-relaxed my-4" dangerouslySetInnerHTML={{ __html: post.content }} />
-      <div className="flex justify-between items-center mt-6">
-        <p className="text-gray-600">Author: {post.author.username} {post.author.verified === 'true' && '✔️'}</p>
-        <p className="text-gray-500">Tags: {post.tags.join(', ')}</p>
+        <div className="flex justify-between items-center mt-6">
+          <p className="text-gray-600">
+            Author: {post.author.username} {post.author.verified && '✔️'}
+          </p>
+          <p className="text-gray-500">Tags: {post.tags.join(', ')}</p>
+        </div>
       </div>
-      
-    </div>
-    <Footer />
+      <Footer />
     </>
-   
   );
 };
 

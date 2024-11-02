@@ -1,6 +1,6 @@
 // Import necessary libraries and components
 import React from 'react';
-import { FaQuoteRight } from 'react-icons/fa';
+
 import { InfiniteMovingCards } from './MovingCards'; // Adjust the path as needed
 
 const testimonials = [

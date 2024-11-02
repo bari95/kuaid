@@ -4,17 +4,17 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Fade, Slide, AttentionSeeker } from "react-awesome-reveal";
+import { Fade,  AttentionSeeker } from "react-awesome-reveal";
 import { FiArrowRightCircle, FiArrowLeftCircle } from "react-icons/fi";
-import { Roboto, Playfair_Display } from "next/font/google";
-import { Lora, Merriweather } from "next/font/google"; // Import fonts from next/font
+import { Roboto } from "next/font/google";
+import {  Merriweather } from "next/font/google"; // Import fonts from next/font
 
 // Load fonts
-const lora = Lora({ subsets: ["latin"], weight: ["400", "700"] });
+
 const merriweather = Merriweather({ subsets: ["latin"], weight: ["300", "400", "700"] });
 
 const roboto = Roboto({ weight: ["400", "500"], subsets: ["latin"] });
-const playfair = Playfair_Display({ weight: ["700"], subsets: ["latin"] });
+
 
 const slides = [
   {

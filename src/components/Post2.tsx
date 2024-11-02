@@ -1,26 +1,36 @@
 import React, { useState } from 'react';
 import { FaRegComment } from 'react-icons/fa';
-import { MdVerified } from 'react-icons/md';
 import { WhatsappShareButton, TwitterShareButton, FacebookShareButton } from 'react-share';
-import { WhatsappIcon, TwitterIcon, FacebookIcon } from 'react-share';
+import { WhatsappIcon, FacebookIcon } from 'react-share';
 import { Merriweather, Lora } from 'next/font/google';
 import Link from 'next/link';
-
-import { FiShare2, FiThumbsDown, FiThumbsUp } from 'react-icons/fi';
-import { HiOutlineHeart } from 'react-icons/hi'; // Importing engagement icon
+import { FiShare2 } from 'react-icons/fi';
 import { BsTwitterX } from 'react-icons/bs';
 import { useRouter } from 'next/navigation';
 
-const formatDate = (timestamp: any) => {
-  const postDate = new Date(timestamp);
-  const options: any = {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+// Define the Answer interface
+interface Answer {
+  _id: string; // Unique identifier for the answer
+  content: string; // The content of the answer
+  author: {
+    _id: string; // Author ID
+    username: string; // Author's username
+    verified: boolean; // Whether the author is verified
   };
-  return postDate.toLocaleDateString(undefined, options);
-};
+  createdAt: string; // Timestamp of when the answer was created
+}
+
+// Define the PostType interface
+interface PostType {
+  _id: string;               
+  title: string;             
+  content: string;           
+  media?: string;            
+  tags: string[];            
+  answers: Answer[]; // Use the defined Answer type
+  upvotes?: string[];        
+  downvotes?: string[];      
+}
 
 const merriweather = Merriweather({
   subsets: ['latin'],
@@ -32,7 +42,7 @@ const lora = Lora({
   weight: ['400', '700'],
 });
 
-const Post = ({ post }: any) => {
+const Post = ({ post }: { post: PostType }) => {
   const router = useRouter();
   const [isContentExpanded, setIsContentExpanded] = useState(false);
   const [isSharePopupOpen, setIsSharePopupOpen] = useState(false);
@@ -63,28 +73,8 @@ const Post = ({ post }: any) => {
         </h2>
       </Link>
 
-      {/* Author Section - Removed as per your request */}
-      {/* If you still want to keep it and handle undefined author, uncomment the following code */}
-      {/* 
-      {post.author && (
-        <div className="flex justify-between items-center mb-4">
-          <div className="flex items-center">
-            <Link href={`/profileViewer/${post.author._id}`} className="flex flex-col">
-              <div className="flex flex-row">
-                <span className={`font-semibold text-sm ${merriweather.className}`}>{post.author.username}</span>
-                {post.author.verified === "true" && <MdVerified size={16} className="text-blue-500 ml-1" title="Verified" />}
-              </div>
-              <div>
-                <span className="text-xs text-gray-500">{formatDate(post.createdAt)}</span>
-              </div>
-            </Link>
-          </div>
-        </div>
-      )}
-      */}
-
       {/* Content Section */}
-      <div className={`text-gray-700 mb-4 ${lora.className}`}>
+      <div className={`text-gray-700 mb-4 ${merriweather.className}`}>
         <Link href={`/blog/${post._id}`}>
           <span className="whitespace-normal break-words text-md">
             {isContentExpanded ? (
@@ -107,7 +97,7 @@ const Post = ({ post }: any) => {
       {/* Tags Section */}
       <div className="mb-4">
         <div className="flex flex-wrap gap-2">
-          {post.tags.map((tag: any, index: any) => (
+          {post.tags.map((tag, index) => (
             <span key={index} className="bg-blue-100 text-blue-500 px-2 py-1 text-xs rounded-md">
               {tag}
             </span>
@@ -117,24 +107,6 @@ const Post = ({ post }: any) => {
 
       {/* Stats Section */}
       <div className="flex justify-between text-gray-500 mb-4">
-       {/* <div className="flex flex-col items-center">
-          <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center cursor-pointer">
-            <FiThumbsUp size={24} />
-          </div>
-          <div>
-            <span className="text-xs">{post.upvotes.length}</span>
-          </div>
-        </div>
-       
-        <div className="flex flex-col items-center">
-         <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center cursor-pointer">
-            <FiThumbsDown size={24} />
-          </div>
-          <div>
-            <span className="text-xs">{post.downvotes.length}</span>
-          </div>
-        </div>
-        */}
         <div className="flex flex-col items-center">
           <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center cursor-pointer" onClick={() => router.push(`/blogs/${post._id}`)}>
             <FaRegComment size={24} />

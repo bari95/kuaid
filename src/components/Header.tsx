@@ -2,18 +2,18 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { FaBars, FaTimes, FaHome, FaInfoCircle, FaServicestack, FaPhoneAlt, FaViadeo, FaRegCalendarTimes, FaCalendarTimes } from 'react-icons/fa';
-import { MdVerified, MdVideoCameraFront, MdVideoFile } from 'react-icons/md';
+import { FaBars, FaTimes, FaHome, FaInfoCircle, FaServicestack, FaPhoneAlt, FaRegCalendarTimes } from 'react-icons/fa';
+import { MdVerified, MdVideoCameraFront } from 'react-icons/md';
 import { SiMicrodotblog } from 'react-icons/si';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isRotating, setIsRotating] = useState(false);
   const toggleMenu = () => setIsOpen(!isOpen);
-  const titleRef = useRef<any>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let rotationTimeout:any;
+    let rotationTimeout: ReturnType<typeof setTimeout>;
 
     const triggerRotation = () => {
       if (titleRef.current) {

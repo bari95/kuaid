@@ -5,10 +5,10 @@
 import React from 'react';
 import { FaGlobe, FaShippingFast } from 'react-icons/fa';
 import { Fade, Slide, Zoom } from 'react-awesome-reveal';
-import { Lora, Merriweather } from "next/font/google"; // Import fonts from next/font
+import {  Merriweather } from "next/font/google"; // Import fonts from next/font
 
 // Load fonts
-const lora = Lora({ subsets: ["latin"], weight: ["400", "700"] });
+
 const merriweather = Merriweather({ subsets: ["latin"], weight: ["300", "400", "700"] });
 
 const About = () => {

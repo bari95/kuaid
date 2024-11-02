@@ -3,11 +3,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Inter } from 'next/font/google';
+
 import { FaQuoteRight } from "react-icons/fa";
 
-// Load Inter font with weights for improved typography
-const inter = Inter({ subsets: ['latin'], weight: ['400', '700'] });
+// Load Inter font with weights for imp
 
 export const InfiniteMovingCards = ({
   items,

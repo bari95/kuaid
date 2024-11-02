@@ -1,6 +1,6 @@
 // Import Google Fonts
 import { Roboto, Merriweather } from 'next/font/google';
-import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaTwitter, FaFacebookF, FaYoutube, FaLinkedinIn, FaArrowUp } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaFacebookF, FaYoutube, FaLinkedinIn, FaArrowUp } from 'react-icons/fa';
 
 const roboto = Roboto({ subsets: ['latin'], weight: ['400', '700'] });
 const merriweather = Merriweather({ subsets: ['latin'], weight: ['700'] });

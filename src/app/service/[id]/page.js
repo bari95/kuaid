@@ -1,4 +1,4 @@
-// app/service/[id]/page.tsx
+// app/service/[id]/page.js
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Merriweather } from 'next/font/google';
@@ -11,49 +11,45 @@ const spicy = Merriweather({ subsets: ['latin'], weight: ['400'] });
 // Dummy data for services
 const dummyServices = [
   {
-      _id: '1',
-      title: 'Air Freight',
-      description: 'Discover the best options for air freight. Our team is dedicated to providing exceptional service...',
-      media: '/img/service-6.jpg',
+    _id: '1',
+    title: 'Air Freight',
+    description: 'Discover the best options for air freight. Our team is dedicated to providing exceptional service...',
+    media: '/img/service-6.jpg',
   },
   {
-      _id: '2',
-      title: 'Ocean Freight',
-      description: 'Discover the best options for ocean freight. Our team is dedicated to providing exceptional service...',
-      media: '/img/service-5.jpg',
+    _id: '2',
+    title: 'Ocean Freight',
+    description: 'Discover the best options for ocean freight. Our team is dedicated to providing exceptional service...',
+    media: '/img/service-5.jpg',
   },
   {
-      _id: '3',
-      title: 'Road Freight',
-      description: 'Discover the best options for road freight. Our team is dedicated to providing exceptional service...',
-      media: '/img/service-1.jpg',
+    _id: '3',
+    title: 'Road Freight',
+    description: 'Discover the best options for road freight. Our team is dedicated to providing exceptional service...',
+    media: '/img/service-1.jpg',
   },
   {
-      _id: '4',
-      title: 'Train Freight',
-      description: 'Discover the best options for train freight. Our team is dedicated to providing exceptional service...',
-      media: '/img/service-2.jpg',
+    _id: '4',
+    title: 'Train Freight',
+    description: 'Discover the best options for train freight. Our team is dedicated to providing exceptional service...',
+    media: '/img/service-2.jpg',
   },
   {
-      _id: '5',
-      title: 'Customs Clearance',
-      description: 'Discover the best options for customs clearance. Our team is dedicated to providing exceptional service...',
-      media: '/img/service-3.jpg',
+    _id: '5',
+    title: 'Customs Clearance',
+    description: 'Discover the best options for customs clearance. Our team is dedicated to providing exceptional service...',
+    media: '/img/service-3.jpg',
   },
   {
-      _id: '6',
-      title: 'Warehouse Solutions',
-      description: 'Discover the best options for warehouse solutions. Our team is dedicated to providing exceptional service...',
-      media: '/img/service-4.jpg',
+    _id: '6',
+    title: 'Warehouse Solutions',
+    description: 'Discover the best options for warehouse solutions. Our team is dedicated to providing exceptional service...',
+    media: '/img/service-4.jpg',
   },
 ];
 
 // Generate dynamic metadata for each service
-export async function generateMetadata({
-  params,
-}: {
-  params: { id: string };
-}): Promise<Metadata> {
+export async function generateMetadata({ params }) {
   const { id } = params;
   const service = dummyServices.find((s) => s._id === id);
 
@@ -71,7 +67,7 @@ export async function generateMetadata({
 }
 
 // Server Component
-const ServiceViewer = async ({ params }: { params: { id: string } }) => {
+const ServiceViewer = async ({ params }) => {
   const { id } = params;
   const service = dummyServices.find((s) => s._id === id);
 
@@ -81,7 +77,7 @@ const ServiceViewer = async ({ params }: { params: { id: string } }) => {
 
   return (
     <>
-    <Header />
+      <Header />
       <div className={`p-20 max-w-2xl mx-auto ${spicy.className}`}>
         <h2 className="text-4xl font-bold mb-4 text-gray-800">{service.title}</h2>
         {service.media && (
@@ -97,7 +93,7 @@ const ServiceViewer = async ({ params }: { params: { id: string } }) => {
         />
       </div>
       <Footer />
-      </>
+    </>
   );
 };
 

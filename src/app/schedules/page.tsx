@@ -4,12 +4,12 @@
 import React from 'react';
 import Flag from 'react-world-flags'; // Importing country flag component
 import { Fade } from 'react-awesome-reveal'; // Importing animation component
-import { Lora, Merriweather } from 'next/font/google'; // Importing fonts from next/google
+import { Merriweather } from 'next/font/google'; // Importing fonts from next/google
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 
 // Load fonts
-const lora = Lora({ subsets: ['latin'], weight: ['400', '700'] });
+
 const merriweather = Merriweather({ subsets: ['latin'], weight: ['300', '400', '700'] });
 
 // Dummy data for upcoming ships

@@ -1,12 +1,38 @@
 'use client';
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import Post from './Post2';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
+interface Author {
+  _id: string;
+  username: string;
+  verified: boolean; // Changed to boolean for better type safety
+}
+
+interface Answer {
+  _id: string;
+  content: string;
+  author: Author;
+  createdAt: string;
+}
+
+interface Post {
+  _id: string;
+  title: string;
+  content: string;
+  author: Author;
+  media: string; // Optional field, could be '' or a URL
+  createdAt: string; // You could also use Date if you parse it
+  tags: string[];
+  upvotes: string[]; // Assuming this is an array of user IDs
+  downvotes: string[]; // Assuming this is an array of user IDs
+  answers: Answer[]; // Specified type for answers
+}
+
 // Dummy data for testing
-const dummyPosts = [
+const dummyPosts: Post[] = [
   {
     _id: '1',
     title: 'First Dummy Post',
@@ -14,7 +40,7 @@ const dummyPosts = [
     author: {
       _id: 'author1',
       username: 'AuthorOne',
-      verified: 'true',
+      verified: true,
     },
     media: 'https://via.placeholder.com/400',
     createdAt: '2024-10-30T10:00:00Z',
@@ -30,7 +56,7 @@ const dummyPosts = [
     author: {
       _id: 'author2',
       username: 'AuthorTwo',
-      verified: 'false',
+      verified: false,
     },
     media: '',
     createdAt: '2024-10-31T12:30:00Z',
@@ -46,7 +72,7 @@ const dummyPosts = [
     author: {
       _id: 'author3',
       username: 'AuthorThree',
-      verified: 'true',
+      verified: true,
     },
     media: 'https://via.placeholder.com/400',
     createdAt: '2024-11-01T14:00:00Z',
@@ -58,17 +84,15 @@ const dummyPosts = [
 ];
 
 const FeaturedBlogPosts: React.FC = () => {
-  const [questions, setQuestions] = useState<any[]>(dummyPosts); // Use dummy data
+  const [questions, setQuestions] = useState<Post[]>(dummyPosts); // Use dummy data
   const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(false); // No pagination needed
-  const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
   // Simulate loading state
   useEffect(() => {
     setLoading(true);
     const timer = setTimeout(() => {
       setLoading(false);
-      setHasMore(false); // No more posts to load since we're using static data
+      setQuestions(dummyPosts);
     }, 1000); // Simulate loading time
 
     return () => clearTimeout(timer); // Clean up the timeout
@@ -109,8 +133,6 @@ const FeaturedBlogPosts: React.FC = () => {
               )}
             </div>
           )}
-
-          {/* Remove load more ref since we're using dummy data */}
         </div>
       </div>
     </section>

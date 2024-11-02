@@ -1,15 +1,6 @@
 import React from 'react';
 import Header from '@/components/contact/Header';
-import {
-  FaHeadphones,
-  FaMapMarkerAlt,
-  FaPhoneAlt,
-  FaEnvelope,
-  FaTwitter,
-  FaFacebookF,
-  FaYoutube,
-  FaLinkedinIn,
-} from 'react-icons/fa';
+
 import { BsArrowUp } from 'react-icons/bs';
 import Footer from '@/components/Footer';
 

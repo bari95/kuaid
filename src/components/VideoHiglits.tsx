@@ -4,12 +4,12 @@
 
 import { FC } from "react";
 import Link from "next/link"; // Import Link for navigation
-import { Lora, Merriweather } from "next/font/google"; // Import fonts from next/font
+import {  Merriweather } from "next/font/google"; // Import fonts from next/font
 import { Slide, Zoom } from "react-awesome-reveal"; // Import animations from react-awesome-reveal
 import { MdPlayCircleOutline } from "react-icons/md"; // Import video icon from react-icons
 
 // Load fonts
-const lora = Lora({ subsets: ["latin"], weight: ["400", "700"] });
+
 const merriweather = Merriweather({ subsets: ["latin"], weight: ["300", "400", "700"] });
 
 interface VideoItem {
