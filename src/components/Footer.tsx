@@ -90,8 +90,16 @@ const Footer = () => {
                         &copy; <a className="border-b border-gray-200 hover:border-blue-400" href="#">kuaid.com</a>, All Rights Reserved.
                     </div>
                     <div className="text-center text-md-end">
-                        Designed By <a className="border-b border-gray-200 hover:border-blue-400" href="https://telenasi.com">Bari Kaneno</a>
-                    </div>
+  Designed By 
+  <a 
+    className="border-b border-gray-200 hover:border-blue-400 ml-1" 
+    href="https://wa.me/255765762688" 
+    target="_blank" 
+    rel="noopener noreferrer"
+  >
+    Bariki Kaneno
+  </a>
+</div>
                 </div>
             </div>
 
