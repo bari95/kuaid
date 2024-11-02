@@ -55,7 +55,7 @@ const Carousel = () => {
             <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4">
               <div className="text-center text-white px-4 max-w-lg mx-auto">
                 <Fade direction="down" triggerOnce>
-                  <h5 className={`${roboto.className} uppercase text-md md:text-lg mb-4 tracking-wide`}>
+                  <h5 className={`${roboto.className} uppercase text-md md:text-lg mb-4 pt-4 tracking-wide`}>
                     Logistics & Transport Solutions
                   </h5>
                 </Fade>

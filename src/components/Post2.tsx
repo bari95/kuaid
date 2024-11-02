@@ -108,7 +108,7 @@ const Post = ({ post }: { post: PostType }) => {
       {/* Stats Section */}
       <div className="flex justify-between text-gray-500 mb-4">
         <div className="flex flex-col items-center">
-          <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center cursor-pointer" onClick={() => router.push(`/blogs/${post._id}`)}>
+          <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center cursor-pointer" onClick={() => router.push(`/blog/${post._id}`)}>
             <FaRegComment size={24} />
           </div>
           <span className="text-xs">{post.answers.length}</span>
