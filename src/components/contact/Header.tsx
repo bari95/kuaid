@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
-import { FaHeadphones, FaHome, FaInfoCircle, FaPhoneAlt, FaServicestack, FaBars, FaTimes } from 'react-icons/fa';
+import { FaHeadphones, FaHome, FaInfoCircle, FaPhoneAlt, FaServicestack, FaBars, FaTimes, FaPhone } from 'react-icons/fa';
 import Link from 'next/link';
+import { BsPhone, BsPhoneVibrateFill } from 'react-icons/bs';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +27,7 @@ const Header: React.FC = () => {
           <Link href="/services" className="text-white hover:text-yellow-300 transition duration-300">Services</Link>
           <Link href="/contact" className="text-yellow-300 font-semibold">Contact</Link>
           <div className="flex items-center text-white">
-            <FaHeadphones className="text-yellow-300 mr-2" />+012 345 6789
+            <BsPhoneVibrateFill size={32} className=" mr-2" />+255 745 787 370
           </div>
         </nav>
 

@@ -15,56 +15,73 @@ const ContactPage: React.FC = () => {
           <div className="w-full md:w-1/2 px-4 mb-12 md:mb-0">
             <h6 className="text-blue-500 uppercase font-semibold tracking-wider mb-2">Get In Touch</h6>
             <h1 className="text-4xl font-extrabold text-gray-800 mb-8">Contact For Any Query</h1>
-            <form className="bg-white shadow-lg p-8 rounded-xl space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="relative">
-                  <input 
-                    type="text" 
-                    id="name" 
-                    placeholder=" " 
-                    className="w-full py-3 px-4 rounded-lg border bg-gray-100 border-gray-300 text-gray-800 focus:outline-none focus:border-gray-500 transition" 
-                  />
-                  <label htmlFor="name" className="absolute top-0 left-4 text-sm text-gray-500 transition-all duration-300 transform -translate-y-2 scale-75">
-                    Your Name
-                  </label>
-                </div>
-                <div className="relative">
-                  <input 
-                    type="email" 
-                    id="email" 
-                    placeholder=" " 
-                    className="w-full py-3 px-4 rounded-lg border border-gray-300 bg-gray-100 text-gray-800 focus:outline-none focus:border-gray-500 transition" 
-                  />
-                  <label htmlFor="email" className="absolute top-0 left-4 text-sm  text-gray-500 transition-all duration-300 transform -translate-y-2 scale-75">
-                    Your Email
-                  </label>
-                </div>
-              </div>
-              <div className="relative">
-                <input 
-                  type="text" 
-                  id="subject" 
-                  placeholder=" " 
-                  className="w-full py-3 px-4 rounded-lg border border-gray-300 text-gray-800 bg-gray-100 focus:outline-none focus:border-gray-500 transition" 
-                />
-                <label htmlFor="subject" className="absolute top-0 left-4 text-sm text-gray-500 bg-gray-100 transition-all duration-300 transform -translate-y-2 scale-75">
-                  Subject
-                </label>
-              </div>
-              <div className="relative">
-                <textarea 
-                  id="message" 
-                  placeholder=" " 
-                  className="w-full h-32 py-3 px-4 rounded-lg border bg-gray-200 border-gray-300 text-gray-800 resize-none focus:outline-none focus:border-gray-500 transition"
-                ></textarea>
-                <label htmlFor="message" className="absolute top-0 left-4 text-sm text-gray-500 transition-all duration-300 transform -translate-y-2 scale-75">
-                  Message
-                </label>
-              </div>
-              <button type="submit" className="w-full py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-300">
-                Send Message
-              </button>
-            </form>
+            <form className="bg-white shadow-xl p-10 rounded-2xl space-y-8 transform transition-all duration-300 hover:shadow-2xl">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div className="relative">
+      <input 
+        type="text" 
+        id="name" 
+        placeholder=" " 
+        className="w-full py-4 px-6 rounded-lg border border-gray-200 bg-gray-50 text-gray-800 shadow-sm hover:shadow-md transition focus:outline-none focus:border-blue-500 focus:bg-white"
+      />
+      <label 
+        htmlFor="name" 
+        className="absolute top-0 left-5 text-sm text-gray-500 bg-white px-1 transform -translate-y-1/2 scale-75 transition-all duration-300 peer-focus:text-blue-500"
+      >
+        Your Name
+      </label>
+    </div>
+    <div className="relative">
+      <input 
+        type="email" 
+        id="email" 
+        placeholder=" " 
+        className="w-full py-4 px-6 rounded-lg border border-gray-200 bg-gray-50 text-gray-800 shadow-sm hover:shadow-md transition focus:outline-none focus:border-blue-500 focus:bg-white"
+      />
+      <label 
+        htmlFor="email" 
+        className="absolute top-0 left-5 text-sm text-gray-500 bg-white px-1 transform -translate-y-1/2 scale-75 transition-all duration-300 peer-focus:text-blue-500"
+      >
+        Your Email
+      </label>
+    </div>
+  </div>
+  <div className="relative">
+    <input 
+      type="text" 
+      id="subject" 
+      placeholder=" " 
+      className="w-full py-4 px-6 rounded-lg border border-gray-200 bg-gray-50 text-gray-800 shadow-sm hover:shadow-md transition focus:outline-none focus:border-blue-500 focus:bg-white"
+    />
+    <label 
+      htmlFor="subject" 
+      className="absolute top-0 left-5 text-sm text-gray-500 bg-white px-1 transform -translate-y-1/2 scale-75 transition-all duration-300 peer-focus:text-blue-500"
+    >
+      Subject
+    </label>
+  </div>
+  <div className="relative">
+    <textarea 
+      id="message" 
+      placeholder=" " 
+      className="w-full h-40 py-4 px-6 rounded-lg border border-gray-200 bg-gray-50 text-gray-800 shadow-sm hover:shadow-md transition resize-none focus:outline-none focus:border-blue-500 focus:bg-white"
+    ></textarea>
+    <label 
+      htmlFor="message" 
+      className="absolute top-0 left-5 text-sm text-gray-500 bg-white px-1 transform -translate-y-1/2 scale-75 transition-all duration-300 peer-focus:text-blue-500"
+    >
+      Message
+    </label>
+  </div>
+  <button 
+    type="submit" 
+    className="w-full py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-semibold shadow-lg hover:from-blue-600 hover:to-blue-700 transition-all duration-300"
+  >
+    Send Message
+  </button>
+</form>
+
+
           </div>
 
           {/* Map */}

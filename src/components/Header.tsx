@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { FaBars, FaTimes, FaHome, FaInfoCircle, FaServicestack, FaPhoneAlt, FaRegCalendarTimes } from 'react-icons/fa';
 import { MdVerified, MdVideoCameraFront } from 'react-icons/md';
 import { SiMicrodotblog } from 'react-icons/si';
+import { BsPhoneVibrateFill } from 'react-icons/bs';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,7 +50,9 @@ export default function Header() {
     )}
   </Link>
 </div>
-
+<div className="flex items-center text-white">
+            <BsPhoneVibrateFill size={24} className=" mr-2" />+255 745 787 370
+          </div>
 
 
         {/* Desktop Navigation */}
