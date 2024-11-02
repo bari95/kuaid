@@ -1,16 +1,22 @@
 // Import Google Fonts
 import { Roboto, Merriweather } from 'next/font/google';
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaFacebookF, FaYoutube, FaLinkedinIn, FaArrowUp } from 'react-icons/fa';
+import { BsTwitterX } from 'react-icons/bs';
+import React from 'react';
 
 const roboto = Roboto({ subsets: ['latin'], weight: ['400', '700'] });
 const merriweather = Merriweather({ subsets: ['latin'], weight: ['700'] });
 
-import React from 'react';
-import { BsTwitterX } from 'react-icons/bs';
-
 const Footer = () => {
     return (
-        <div className={`bg-gray-900 text-gray-200 pt-5 ${roboto.className}`} style={{ marginTop: '6rem' }}>
+        <div
+            className={`bg-gray-900 text-gray-200 pt-5 ${roboto.className}`}
+            style={{
+                backgroundImage: 'url("/grid.svg")',
+              
+                marginTop: '6rem',
+            }}
+        >
             <div className="container mx-auto py-5">
                 <div className="grid grid-cols-1 px-4 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <div className="mb-5">
@@ -85,7 +91,6 @@ const Footer = () => {
                     </div>
                     <div className="text-center text-md-end">
                         Designed By <a className="border-b border-gray-200 hover:border-blue-400" href="https://telenasi.com">Bari Kaneno</a>
-                        <br />
                     </div>
                 </div>
             </div>
