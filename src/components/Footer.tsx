@@ -85,12 +85,13 @@ const Footer = () => {
             </div>
 
             <div className="container mx-auto">
-                <div className="flex justify-between items-center py-4 border-t border-gray-700">
+                <div className="flex flex-col md:flex-row justify-between items-center py-4 border-t border-gray-700">
                     <div className="text-center text-md-start mb-3 mb-md-0">
                         &copy; <a className="border-b border-gray-200 hover:border-blue-400" href="#">kuaid.com</a>, All Rights Reserved.
                     </div>
-                    <div className="text-center text-md-end">
-  Designed By 
+                    <div className="text-center text-md-end text-sm">
+  Developed by
+  
   <a 
     className="border-b border-gray-200 hover:border-blue-400 ml-1" 
     href="https://wa.me/255765762688" 
