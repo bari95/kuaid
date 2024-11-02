@@ -12,7 +12,7 @@ const Footer = () => {
         <div
             className={`bg-gray-900 text-gray-200 pt-5 ${roboto.className}`}
             style={{
-                backgroundImage: 'url("/grid.svg")',
+                backgroundImage: 'url("/footer-grid.svg")',
               
                 marginTop: '6rem',
             }}
