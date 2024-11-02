@@ -14,8 +14,51 @@
   }
 }
 
+
+
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Add this to your global CSS file */
+.container-fluid {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+/* Scroller animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Classes for different animation speeds */
+.animate-scroll {
+  animation: scroll var(--animation-duration, 20s) linear infinite;
+  animation-direction: var(--animation-direction, forwards);
+}
+
+/* styles/globals.css */
+@keyframes rotatePause {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(1080deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-rotate-pause {
+  display: inline-block; /* ensures the link rotates as a whole */
+  animation: rotatePause 3s ease-in-out ;
 }

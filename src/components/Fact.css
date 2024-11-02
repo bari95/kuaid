@@ -1,0 +1,36 @@
+/* styles/facts.css */
+
+/* Background Animation */
+.background-animation {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.8), rgba(29, 78, 216, 0.8));
+    animation: gradient-animation 6s ease infinite;
+    background-size: 400% 400%;
+    border-radius: 10px; /* Optional: for rounded corners */
+    padding: 20px; /* Optional: for inner spacing */
+}
+
+@keyframes gradient-animation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Card Hover Animation */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Text Hover Effects */
+.card h2 {
+    transition: color 0.3s ease;
+}
+
+.card:hover h2 {
+    color: #fbbf24; /* Tailwind's yellow-400 */
+}
+
