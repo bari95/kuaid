@@ -16,6 +16,7 @@ const Quote: React.FC = () => {
         instructions: ''
     });
     const [successMessage, setSuccessMessage] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -24,6 +25,7 @@ const Quote: React.FC = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);  // Start loading
 
         try {
             const response = await fetch('/api/quote', {
@@ -44,7 +46,13 @@ const Quote: React.FC = () => {
         } catch (error) {
             console.error('Submission error:', error);
             alert('There was an error submitting the form. Please try again.');
+        } finally {
+            setLoading(false);  // Stop loading
         }
+    };
+
+    const resetForm = () => {
+        setSuccessMessage('');
     };
 
     return (
@@ -70,6 +78,12 @@ const Quote: React.FC = () => {
                             <AttentionSeeker effect="pulse">
                                 <div className="p-6 bg-green-100 text-green-700 rounded-lg text-lg font-semibold">
                                     {successMessage}
+                                    <button
+                                        onClick={resetForm}
+                                        className="mt-4 px-4 py-2 bg-primary text-white bg-green-500 rounded-lg hover:bg-primary-dark"
+                                    >
+                                        Submit Another Quote
+                                    </button>
                                 </div>
                             </AttentionSeeker>
                         ) : (
@@ -120,10 +134,10 @@ const Quote: React.FC = () => {
                                             style={{ height: '55px' }}
                                             required
                                         >
-                                            <option value="" disabled>Select A Freight Service</option>
-                                            <option value="local">Local Freight Shipping</option>
-                                            <option value="regional">Regional Freight Shipping</option>
-                                            <option value="international">International Freight Shipping</option>
+                                            <option   className="form-select w-full text-gray-500 border border-gray-300 rounded-lg p-2" value="" disabled>Select A Freight Service</option>
+                                            <option   className="form-select w-full text-gray-500 border border-gray-300 rounded-lg p-2" value="local">Local Freight Shipping</option>
+                                            <option   className="form-select w-full text-gray-500 border border-gray-300 rounded-lg p-2" value="regional">Regional Freight Shipping</option>
+                                            <option   className="form-select w-full text-gray-500 border border-gray-300 rounded-lg p-2" value="international">International Freight Shipping</option>
                                         </select>
                                     </div>
                                     <div className="col-span-2">
@@ -131,15 +145,19 @@ const Quote: React.FC = () => {
                                             name="instructions"
                                             value={formData.instructions}
                                             onChange={handleChange}
-                                            className="form-input w-full border border-gray-300 text-gray-300 rounded-lg p-2"
+                                            className="form-input w-full border border-gray-300 text-gray-500 rounded-lg p-2"
                                             placeholder="Special Instructions or Notes"
                                             rows={4}
                                         ></textarea>
                                     </div>
                                     <div className="col-span-2">
-                                        <button className="btn-primary w-full py-3 rounded-lg flex items-center justify-center" type="submit">
-                                            <FaRegEdit className="mr-2" />
-                                            Submit Request
+                                        <button className="btn-primary w-full py-3 rounded-lg flex items-center justify-center" type="submit" disabled={loading}>
+                                            {loading ? (
+                                                <span className="spinner-border animate-spin inline-block w-4 h-4 border-4 rounded-full border-t-transparent mr-2"></span>
+                                            ) : (
+                                                <FaRegEdit className="mr-2" />
+                                            )}
+                                            {loading ? 'Submitting...' : 'Submit Request'}
                                         </button>
                                     </div>
                                 </div>
