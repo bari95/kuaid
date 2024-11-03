@@ -16,9 +16,12 @@ const Header: React.FC = () => {
     <header className="bg-gradient-to-r from-blue-500 to-blue-300 w-full shadow-lg border-t-4 border-blue-500 sticky top-0 z-40">
       <div className="container mx-auto flex justify-between items-center px-4 py-4 lg:px-6">
         {/* Logo */}
-        <Link href="/" className="flex items-center space-x-2 text-white">
-          <h2 className="text-2xl font-semibold bg-blue-500 p-2 rounded-lg">Kuaid-Cargo</h2>
-        </Link>
+        <Link href="/" className="flex items-center space-x-2  group">
+  <h2 className="font-semibold bg-blue-500 p-2 rounded-lg text-yellow-300 transform transition-transform duration-700 group-hover:rotate-360 group-hover:scale-105 group-hover:shadow-lg group-hover:text-yellow-300">
+    Kuaid-Cargo
+  </h2>
+</Link>
+
 
         {/* Desktop Nav Links */}
         <nav className="hidden lg:flex items-center space-x-6">

@@ -62,3 +62,20 @@ body {
   display: inline-block; /* ensures the link rotates as a whole */
   animation: rotatePause 3s ease-in-out ;
 }
+
+@keyframes rotatePauseReverse {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-1080deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-rotate-pause-reverse {
+  display: inline-block; /* ensures the link rotates as a whole */
+  animation: rotatePauseReverse 3s ease-in-out;
+}
