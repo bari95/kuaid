@@ -17,7 +17,7 @@ const Header: React.FC = () => {
       <div className="container mx-auto flex justify-between items-center px-4 py-4 lg:px-6">
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-2 text-white">
-          <h2 className="text-2xl font-semibold bg-blue-500 p-2 rounded-lg">Kuaid</h2>
+          <h2 className="text-2xl font-semibold bg-blue-500 p-2 rounded-lg">Kuaid-Cargo</h2>
         </Link>
 
         {/* Desktop Nav Links */}

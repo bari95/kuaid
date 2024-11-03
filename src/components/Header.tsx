@@ -43,17 +43,17 @@ export default function Header() {
       <div className="container mx-auto flex justify-between items-center p-4 md:px-8">
       <div ref={titleRef} className="text-2xl text-white flex items-center relative">
   <Link href="/" className="hover:text-yellow-300 relative">
-    Kuaid
+    Kuaid-Cargo
     {/* Display the verified icon when rotation stops */}
     {!isRotating && (
       <MdVerified className="absolute top-1/2 transform -translate-y-1/2 left-full ml-1 text-white" />
     )}
   </Link>
 </div>
-<div className="flex items-center text-white">
+{/*<div className="flex items-center text-white">
             <BsPhoneVibrateFill size={24} className=" mr-2" />+255 745 787 370
           </div>
-
+*/}
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-8">

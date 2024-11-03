@@ -62,7 +62,7 @@ const Footer = () => {
                             <FaPhoneAlt className="mr-2" /> +255 3475 87370
                         </p>
                         <p className="mb-2 flex items-center">
-                            <FaEnvelope className="mr-2" /> info@kuaid.com
+                            <FaEnvelope className="mr-2" /> info@kuaid-cargo.com
                         </p>
                         <div className="flex space-x-3 pt-2">
                             <a className="text-gray-200 hover:text-blue-400" href="#">
