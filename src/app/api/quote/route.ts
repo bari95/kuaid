@@ -16,15 +16,15 @@ export async function POST(req: Request) {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.MAILER_USER_EMAIL,
-        pass: process.env.MAILER_APP_PASSWORD,
+        user: process.env.NEXT_PUBLIC_MAILER_USER,
+        pass: process.env.NEXT_PUBLIC_MAILER_APP,
       },
     });
 
     // Internal email notification (sent to your team's email)
     const internalMailOptions = {
       from: email,
-      to: process.env.MAILER_USER_EMAIL,
+      to: process.env.NEXT_PUBLIC_MAILER_USER,
       subject: 'New Quote Request Received',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border-radius: 8px; background: linear-gradient(135deg, #e0f7fa, #ffffff); color: #333;">
@@ -63,7 +63,7 @@ export async function POST(req: Request) {
 
     // Confirmation email for the user
     const userMailOptions = {
-      from: process.env.MAILER_USER_EMAIL,
+      from: process.env.NEXT_PUBLIC_MAILER_USER,
       to: email,
       subject: 'We Received Your Quote Request!',
       html: `

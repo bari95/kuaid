@@ -8,9 +8,9 @@ const MapEmbed = () => {
     <div className="w-full md:w-1/2 px-4 h-96">
       <div className="h-full w-full bg-gray-200 rounded-lg overflow-hidden shadow-lg border-4 border-blue-500 relative">
         {/* Header */}
-        <div className="absolute top-0 left-0 w-full bg-blue-600 bg-opacity-90 text-white text-lg font-semibold p-2 rounded-t-lg z-10 shadow-md">
-          <h3 className="text-center">Our Location in Magomeni, Dar es Salaam, Tanzania</h3>
-        </div>
+       
+          <h3 className="text-center shadow-md">Our Location in Magomeni, Dar es Salaam, Tanzania</h3>
+       
 
         {/* Map Iframe */}
         <iframe
