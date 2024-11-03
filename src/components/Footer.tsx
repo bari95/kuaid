@@ -1,19 +1,53 @@
 // Import Google Fonts
+
+"use client"
 import { Roboto, Merriweather } from 'next/font/google';
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaFacebookF, FaYoutube, FaLinkedinIn, FaArrowUp } from 'react-icons/fa';
 import { BsTwitterX } from 'react-icons/bs';
-import React from 'react';
+import React, { useState } from 'react';
+import { AttentionSeeker } from 'react-awesome-reveal';
 
 const roboto = Roboto({ subsets: ['latin'], weight: ['400', '700'] });
 const merriweather = Merriweather({ subsets: ['latin'], weight: ['700'] });
 
 const Footer = () => {
+    const [email, setEmail] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [error, setError] = useState<string>('');
+
+    const handleSubscribe = async () => {
+        setLoading(true);
+        setSuccess(false);
+        setError('');
+
+        try {
+            const response = await fetch('/api/newsletter', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email }),
+            });
+
+            if (response.ok) {
+                setSuccess(true);
+                setEmail(''); // Clear input field
+            } else {
+                const errorData = await response.json();
+                setError(errorData.message || 'Subscription failed');
+            }
+        } catch (err) {
+            setError('An error occurred. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
     return (
         <div
             className={`bg-gray-900 text-gray-200 pt-5 ${roboto.className}`}
             style={{
                 backgroundImage: 'url("/footer-grid.svg")',
-              
                 marginTop: '6rem',
             }}
         >
@@ -70,16 +104,26 @@ const Footer = () => {
                         <div className="relative mx-auto" style={{ maxWidth: '400px' }}>
                             <input
                                 className="border-0 w-full py-3 pl-4 pr-12 rounded bg-gray-800 text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                type="text"
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 placeholder="Your email"
+                                disabled={loading}
                             />
                             <button
                                 type="button"
+                                onClick={handleSubscribe}
                                 className="bg-blue-600 text-white py-2 absolute top-0 right-0 mt-2 mr-2 rounded hover:bg-blue-500"
+                                disabled={loading}
                             >
-                                SignUp
+                                {loading ? 'Loading...' : 'Sign Up'}
                             </button>
                         </div>
+                        {success && (
+                            <AttentionSeeker effect="bounce">
+                                <p className="text-green-500 mt-3">Thank you for subscribing!</p>
+                            </AttentionSeeker>
+                        )}
                     </div>
                 </div>
             </div>
@@ -90,17 +134,16 @@ const Footer = () => {
                         &copy; <a className="border-b border-gray-200 hover:border-blue-400" href="#">kuaid.com</a>, All Rights Reserved.
                     </div>
                     <div className="text-center text-md-end text-sm">
-  Developed by
-  
-  <a 
-    className="border-b border-gray-200 hover:border-blue-400 ml-1" 
-    href="https://wa.me/255765762688" 
-    target="_blank" 
-    rel="noopener noreferrer"
-  >
-    Bariki Kaneno
-  </a>
-</div>
+                        Developed by
+                        <a
+                            className="border-b border-gray-200 hover:border-blue-400 ml-1"
+                            href="https://wa.me/255765762688"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Bariki Kaneno
+                        </a>
+                    </div>
                 </div>
             </div>
 
