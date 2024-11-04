@@ -149,7 +149,7 @@ const ServiceViewer = async ({ params }) => {
             "provider": {
               "@type": "Organization",
               "name": "Kuaid Cargo",
-              "url": domain,
+              "url": domain
             },
           }),
         }}
