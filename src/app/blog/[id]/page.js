@@ -123,7 +123,7 @@ export async function generateMetadata({ params }) {
 
 // Server Component
 const PostViewer = async ({ params }) => {
-  const { id } = params;
+  const { id } = params ; 
   const post = dummyPosts.find((p) => p._id === id);
 
   if (!post) {
