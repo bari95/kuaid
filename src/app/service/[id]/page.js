@@ -1,3 +1,5 @@
+
+
 // app/service/[id]/page.js
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -5,6 +7,7 @@ import { Merriweather } from 'next/font/google';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import Script from 'next/script';
+import Image from 'next/image';
 
 const spicy = Merriweather({ subsets: ['latin'], weight: ['400'] });
 
@@ -89,34 +92,11 @@ export async function generateMetadata({ params }) {
         },
       ],
     },
-    // Adding JSON-LD structured data
     alternates: {
       canonical: `${domain}/service/${id}`,
     },
-    additionalMetadata: (
-      <Script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Service",
-          "name": service.title,
-          "description": service.description,
-          "url": `${domain}/service/${service._id}`,
-          ...(service.media && { "image": `${domain}${service.media}` }), 
-          "provider": {
-            "@type": "Organization",
-            "name": "Kuaid Cargo",
-            "url": domain,
-          },
-        }),
-      }}
-    />
-    ),
   };
 }
-
-
 
 // Server Component
 const ServiceViewer = async ({ params }) => {
@@ -127,17 +107,25 @@ const ServiceViewer = async ({ params }) => {
     notFound();
   }
 
+  const domain = "https://kuaid.vercel.app"; // Update to kuaid-cargo.com once live
+
   return (
     <>
       <Header />
       <div className={`p-20 max-w-2xl mx-auto ${spicy.className}`}>
         <h2 className="text-4xl font-bold mb-4 text-gray-800">{service.title}</h2>
         {service.media && (
-          <img
-            src={service.media}
-            alt={service.title}
-            className="my-4 w-full h-auto rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-300"
-          />
+          <div className="my-4 w-full h-auto rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-300 relative">
+            <Image
+              src={service.media}
+              alt={service.title}
+              layout="responsive" // This will make the image responsive
+              width={700} // Provide a reasonable default width
+              height={400} // Provide a reasonable default height
+              className="rounded-lg"
+              lazy
+            />
+          </div>
         )}
         <div
           className="text-gray-700 text-lg"
@@ -145,6 +133,27 @@ const ServiceViewer = async ({ params }) => {
         />
       </div>
       <Footer />
+
+      {/* JSON-LD Structured Data */}
+      <Script
+        id="json-ld-service-structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": service.title,
+            "description": service.description,
+            "url": `${domain}/service/${service._id}`,
+            ...(service.media && { "image": `${domain}${service.media}` }),
+            "provider": {
+              "@type": "Organization",
+              "name": "Kuaid Cargo",
+              "url": domain,
+            },
+          }),
+        }}
+      />
     </>
   );
 };

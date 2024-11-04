@@ -8,6 +8,7 @@ import { Lora, Merriweather } from 'next/font/google';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Image from 'next/image';
 
 // Load fonts
 const lora = Lora({ subsets: ['latin'], weight: ['400', '700'] });
@@ -117,13 +118,18 @@ const ServicePage = () => {
               <div key={service._id} className="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
                 <div className="p-4 bg-white rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-300">
                   <div className="overflow-hidden mb-4 rounded-lg">
-                    {service.media && (
-                      <img
-                        className="w-full h-48 object-cover transition-transform duration-300 transform hover:scale-110"
-                        src={service.media}
-                        alt={service.title}
-                      />
-                    )}
+                  {service.media && (
+    <div className="my-4 w-full h-auto rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-300 relative">
+      <Image
+        src={service.media}
+        alt={service.title}
+        layout="responsive" // This will make the image responsive
+        width={700} // Provide a reasonable default width
+        height={400} // Provide a reasonable default height
+        className="rounded-lg"
+      />
+    </div>
+  )}
                   </div>
                   <h4 className={`mb-3 text-xl font-semibold text-gray-800 ${fairplay.className}`}>
                     {service.title} Service
