@@ -58,6 +58,7 @@ export default function RootLayout({
       <head>
         {/* JSON-LD Schema Markup for Organization */}
         <Script
+          id='layout-schema'
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
