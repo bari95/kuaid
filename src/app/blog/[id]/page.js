@@ -3,6 +3,7 @@
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import { Metadata } from 'next';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Script from 'next/script';
 
@@ -109,7 +110,7 @@ export async function generateMetadata({ params }) {
             author: {
               '@type': 'Person',
               name: post.author.username,
-              ...(post.author.verified && { sameAs: `${domain}/author/${post.author._id}` }),
+              ...(post.author.verified && { sameAs: `${domain}/blog/${post.author._id}` }),
             },
             datePublished: post.createdAt,
             genre: post.tags.join(', '),
@@ -135,11 +136,16 @@ const PostViewer = async ({ params }) => {
       <div className="max-w-2xl mx-auto p-4 pt-20">
         <h2 className="text-4xl font-semibold text-gray-900">{post.title}</h2>
         {post.media && (
-          <img
-            src={post.media}
-            alt={post.title}
-            className="my-4 w-full h-auto rounded-lg shadow-md"
-          />
+        
+          <Image
+          src={post.media}
+          alt={post.title}
+          layout="responsive" // This will make the image responsive
+          width={700} // Provide a reasonable default width
+          height={400} // Provide a reasonable default height
+          className="rounded-lg"
+          lazy
+        />
         )}
         <div
           className="text-gray-700 text-lg leading-relaxed my-4"
