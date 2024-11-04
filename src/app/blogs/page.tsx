@@ -50,6 +50,7 @@ export default function Home() {
 
       {/* JSON-LD Schema Markup for Home Page */}
       <Script
+        id='blog-schema-markup'
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -64,7 +65,7 @@ export default function Home() {
               "url": domain,
               "logo": {
                 "@type": "ImageObject",
-                "url": `${domain}/images/logo.jpg`,
+                "url": `${domain}/img/service-1jpg`,
                 "width": 60,
                 "height": 60,
               }

@@ -1,9 +1,10 @@
-// app/post/[id]/page.js
+// app/blog/[id]/page.js
 
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import Script from 'next/script';
 
 // Dummy data array
 const dummyPosts = [
@@ -68,28 +69,53 @@ export async function generateMetadata({ params }) {
     };
   }
 
+  const domain = "https://kuaid.vercel.app"; // Update to kuaid-cargo.com once live
+
   return {
     title: post.title || 'Kuaid Post',
     description: post.content || 'Read the latest post on Kuaid.',
     openGraph: {
       title: post.title || 'Kuaid Post',
       description: post.content || 'Read the latest post on Kuaid.',
-      images: [{ url: post.media || 'https://kuaid.com/images/logo.jpg' }],
-      url: `https://kuaid.com/blog/${id}`,
+      images: [{ url: post.media || `${domain}/images/logo.jpg` }],
+      url: `${domain}/blog/${id}`,
       siteName: 'Kuaid',
       type: 'article',
     },
     twitter: {
       card: 'summary_large_image',
       site: '@Kuaid',
-      title: post.title || 'Kuaid blog',
+      title: post.title || 'Kuaid Blog',
       description: post.content || 'Read the latest blogs on Kuaid.',
-      images: [post.media || 'https://kuaid.com/images/logo.jpg'],
+      images: [post.media || `${domain}/images/logo.jpg`],
     },
     robots: {
       index: true,
       follow: true,
     },
+    // Adding JSON-LD structured data
+    additionalMetadata: (
+      <Script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BlogPosting',
+            headline: post.title,
+            description: post.content,
+            url: `${domain}/blog/${post._id}`,
+            image: post.media || `${domain}/images/logo.jpg`,
+            author: {
+              '@type': 'Person',
+              name: post.author.username,
+              ...(post.author.verified && { sameAs: `${domain}/author/${post.author._id}` }),
+            },
+            datePublished: post.createdAt,
+            genre: post.tags.join(', '),
+          }),
+        }}
+      />
+    ),
   };
 }
 
