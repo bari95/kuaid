@@ -96,6 +96,7 @@ export async function generateMetadata({ params }) {
     // Adding JSON-LD structured data
     additionalMetadata: (
       <Script
+        id='blog-script'
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
