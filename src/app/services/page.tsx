@@ -88,6 +88,7 @@ const ServicePage = () => {
 
       {/* Open Graph & Twitter Cards Metadata */}
       <Script
+        id='service-page-script'
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
