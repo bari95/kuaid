@@ -2,6 +2,7 @@
 
 "use client";
 
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 import { FaQuoteRight } from "react-icons/fa";
@@ -99,11 +100,14 @@ export const InfiniteMovingCards = ({
          >
          <FaQuoteRight className="text-gray-200 absolute top-0 right-0 mt-3 mr-4 text-3xl" />
          <div className="flex items-end mb-4">
-             <img
-                 className="w-20 h-20 rounded-full object-cover flex-shrink-0 border-2 border-primary"
-                 src={item.image}
-                 alt={item.name}
-             />
+            
+              <Image
+                           src={item.image}
+                            alt={item.name}
+                             width={500}
+                            height={300}
+                            className="w-20 h-20 rounded-full object-cover flex-shrink-0 border-2 border-primary"
+                />
              <div className="ml-4">
                  <h5 className="text-lg font-semibold mb-1 text-gray-800 font-poppins">{item.name}</h5>
                  <p className="text-gray-500 font-roboto">{item.profession}</p>

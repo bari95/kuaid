@@ -89,80 +89,87 @@ const Quote: React.FC = () => {
                             </AttentionSeeker>
                         ) : (
                             <form onSubmit={handleSubmit}>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <div>
-                                        <input
-                                            type="text"
-                                            name="name"
-                                            value={formData.name}
-                                            onChange={handleChange}
-                                            className="form-input w-full border border-gray-300 text-gray-500 rounded-lg p-2"
-                                            placeholder="Your Name"
-                                            style={{ height: '55px' }}
-                                            required
-                                        />
-                                    </div>
-                                    <div>
-                                        <input
-                                            type="email"
-                                            name="email"
-                                            value={formData.email}
-                                            onChange={handleChange}
-                                            className="form-input w-full border border-gray-300 rounded-lg p-2"
-                                            placeholder="Your Email"
-                                            style={{ height: '55px' }}
-                                            required
-                                        />
-                                    </div>
-                                    <div>
-                                        <input
-                                            type="text"
-                                            name="mobile"
-                                            value={formData.mobile}
-                                            onChange={handleChange}
-                                            className="form-input w-full border border-gray-300 rounded-lg p-2"
-                                            placeholder="Your Mobile"
-                                            style={{ height: '55px' }}
-                                            required
-                                        />
-                                    </div>
-                                    <div>
-                                        <select
-                                            name="service"
-                                            value={formData.service}
-                                            onChange={handleChange}
-                                            className="form-select w-full text-gray-500 border border-gray-300 rounded-lg p-2"
-                                            style={{ height: '55px' }}
-                                            required
-                                        >
-                                            <option   className="form-select w-full text-gray-500 border border-gray-300 rounded-lg p-2" value="" disabled>Select A Freight Service</option>
-                                            <option   className="form-select w-full text-gray-500 border border-gray-300 rounded-lg p-2" value="local">Local Freight Shipping</option>
-                                            <option   className="form-select w-full text-gray-500 border border-gray-300 rounded-lg p-2" value="regional">Regional Freight Shipping</option>
-                                            <option   className="form-select w-full text-gray-500 border border-gray-300 rounded-lg p-2" value="international">International Freight Shipping</option>
-                                        </select>
-                                    </div>
-                                    <div className="col-span-2">
-                                        <textarea
-                                            name="instructions"
-                                            value={formData.instructions}
-                                            onChange={handleChange}
-                                            className="form-input w-full border border-gray-300 text-gray-500 rounded-lg p-2"
-                                            placeholder="Special Instructions or Notes"
-                                            rows={4}
-                                        ></textarea>
-                                    </div>
-                                    <div className="col-span-2">
-                                        <button className="btn-primary w-full py-3 rounded-lg flex items-center justify-center" type="submit" disabled={loading}>
-                                            {loading ? (
-                                                <span className="spinner-border animate-spin inline-block w-4 h-4 border-4 rounded-full border-t-transparent mr-2"></span>
-                                            ) : (
-                                                <FaRegEdit className="mr-2" />
-                                            )}
-                                            {loading ? 'Submitting...' : 'Submit Request'}
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="col-span-1">
+            <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                className="form-input w-full border border-gray-300 text-gray-500 rounded-lg p-2 sm:p-3"
+                placeholder="Your Name"
+                style={{ height: '55px' }}
+                required
+            />
+        </div>
+        <div className="col-span-1">
+            <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="form-input w-full border border-gray-300 rounded-lg p-2 sm:p-3"
+                placeholder="Your Email"
+                style={{ height: '55px' }}
+                required
+            />
+        </div>
+        <div className="col-span-1">
+            <input
+                type="text"
+                name="mobile"
+                value={formData.mobile}
+                onChange={handleChange}
+                className="form-input w-full border border-gray-300 rounded-lg p-2 sm:p-3"
+                placeholder="Your Mobile"
+                style={{ height: '55px' }}
+                required
+            />
+        </div>
+        <div className="col-span-1">
+            <select
+                name="service"
+                value={formData.service}
+                onChange={handleChange}
+                className="form-select w-full text-gray-500 border border-gray-300 rounded-lg p-2 sm:p-3"
+                style={{ height: '55px' }}
+                required
+            >
+                <option className="text-gray-500" value="" disabled>
+                    Select A Freight Service
+                </option>
+                <option value="local">Local Freight Shipping</option>
+                <option value="regional">Regional Freight Shipping</option>
+                <option value="international">International Freight Shipping</option>
+            </select>
+        </div>
+        <div className="col-span-1 sm:col-span-2">
+            <textarea
+                name="instructions"
+                value={formData.instructions}
+                onChange={handleChange}
+                className="form-input w-full border border-gray-300 text-gray-500 rounded-lg p-2 sm:p-3"
+                placeholder="Special Instructions or Notes"
+                rows={4}
+            ></textarea>
+        </div>
+        <div className="col-span-1 sm:col-span-2">
+            <button
+                className="btn-primary w-full py-3 rounded-lg flex items-center justify-center"
+                type="submit"
+                disabled={loading}
+            >
+                {loading ? (
+                    <span className="spinner-border animate-spin inline-block w-4 h-4 border-4 rounded-full border-t-transparent mr-2"></span>
+                ) : (
+                    <FaRegEdit className="mr-2" />
+                )}
+                {loading ? 'Submitting...' : 'Submit Request'}
+            </button>
+        </div>
+    </div>
+</form>
+
                         )}
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 // components/Team.js
 'use client';
+import Image from 'next/image';
 import React from 'react';
 import { Fade, Zoom } from "react-awesome-reveal"; // Importing animations from react-awesome-reveal
 
@@ -17,7 +18,15 @@ const Team = () => {
                     <Zoom key={index} cascade damping={0.1}>
                         <div className="bg-white rounded-lg shadow-lg p-4 transition-transform transform hover:scale-105">
                             <div className="overflow-hidden mb-4 rounded-lg">
-                                <img className="img-fluid w-full h-40 object-cover" src={`img/team-${index + 1}.jpg`} alt="" />
+               
+                            
+                                <Image
+                                       src={`/img/team-${index + 1}.jpg`}
+                                        alt=''
+                                        width={500}
+                                        height={300}
+                                        className="w-full h-48 object-cover transition-transform duration-300 transform hover:scale-110"
+                                    />
                             </div>
                             <h5 className="mb-0 text-xl font-semibold">Full Name</h5>
                             <p className="text-gray-500">Designation</p>

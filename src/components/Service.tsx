@@ -1,8 +1,9 @@
 // components/Service.js
 import React from 'react';
-import { FaArrowRight } from 'react-icons/fa'; // Importing React Icon for the arrow
-import { Lora, Merriweather } from 'next/font/google'; // Importing fonts from next/google
-import Link from 'next/link'; // Importing Link from next/router for routing
+import { FaArrowRight } from 'react-icons/fa';
+import { Lora, Merriweather } from 'next/font/google';
+import Link from 'next/link';
+import Image from 'next/image'; // Importing Next.js Image component
 
 // Load fonts
 const lora = Lora({ subsets: ['latin'], weight: ['400', '700'] });
@@ -61,7 +62,13 @@ const Service = () => {
                         <div key={service._id} className="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
                             <div className="p-4 bg-white rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-300">
                                 <div className="overflow-hidden mb-4 rounded-lg">
-                                    <img className="w-full h-48 object-cover transition-transform duration-300 transform hover:scale-110" src={service.media} alt={service.title} />
+                                    <Image
+                                        src={service.media}
+                                        alt={service.title}
+                                        width={500}
+                                        height={300}
+                                        className="w-full h-48 object-cover transition-transform duration-300 transform hover:scale-110"
+                                    />
                                 </div>
                                 <h4 className={`mb-3 text-xl font-semibold text-gray-800 ${fairplay.className}`}>{service.title} Service</h4>
                                 <p className="text-gray-700">{service.description}</p>
