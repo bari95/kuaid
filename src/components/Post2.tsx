@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { FaRegComment } from 'react-icons/fa';
 import { WhatsappShareButton, TwitterShareButton, FacebookShareButton } from 'react-share';
 import { WhatsappIcon, FacebookIcon } from 'react-share';
@@ -10,14 +11,14 @@ import { useRouter } from 'next/navigation';
 
 // Define the Answer interface
 interface Answer {
-  _id: string; // Unique identifier for the answer
-  content: string; // The content of the answer
+  _id: string; 
+  content: string; 
   author: {
-    _id: string; // Author ID
-    username: string; // Author's username
-    verified: boolean; // Whether the author is verified
+    _id: string; 
+    username: string; 
+    verified: boolean;
   };
-  createdAt: string; // Timestamp of when the answer was created
+  createdAt: string;
 }
 
 // Define the PostType interface
@@ -27,7 +28,7 @@ interface PostType {
   content: string;           
   media?: string;            
   tags: string[];            
-  answers: Answer[]; // Use the defined Answer type
+  answers: Answer[];
   upvotes?: string[];        
   downvotes?: string[];      
 }
@@ -57,12 +58,16 @@ const Post = ({ post }: { post: PostType }) => {
 
   return (
     <div className="bg-white p-4 mb-6 shadow-md transition duration-200 ease-in-out hover:shadow-xl">
-      {/* Media Section */}
+      {/* Media Section with Next.js Image for lazy loading */}
       {post.media && (
-        <img
+        <Image
           src={post.media}
           alt={post.title}
+          width={600} // Set the width and height based on your layout
+          height={400}
           className="w-auto h-auto object-cover rounded-t-lg mb-4"
+          placeholder="blur"
+          blurDataURL="/path/to/placeholder.jpg" // Optional placeholder for smooth loading
         />
       )}
 
@@ -126,10 +131,10 @@ const Post = ({ post }: { post: PostType }) => {
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <h3 className="mb-4 text-lg font-semibold text-center">Share this post</h3>
             <div className="flex space-x-4 justify-center">
-              <WhatsappShareButton url={`https://kuaid.com/blog/${post._id}`} title={post.title}>
+              <WhatsappShareButton url={`https://kuaid.vercel.app/blog/${post._id}`} title={post.title}>
                 <WhatsappIcon className="w-8 h-8 rounded-full" />
               </WhatsappShareButton>
-              <FacebookShareButton url={`https://kuaid.com/blog/${post._id}`} title={post.title}>
+              <FacebookShareButton url={`https://kuaid.vercel.app/blog/${post._id}`} title={post.title}>
                 <FacebookIcon className="w-8 h-8 rounded-full" />
               </FacebookShareButton>
               <TwitterShareButton url={`https://kuaid.com/questions/${post._id}`} title={post.title}>

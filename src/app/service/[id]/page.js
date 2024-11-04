@@ -4,51 +4,50 @@ import { notFound } from 'next/navigation';
 import { Merriweather } from 'next/font/google';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
+import Script from 'next/script';
 
-// Import the Spicy font
 const spicy = Merriweather({ subsets: ['latin'], weight: ['400'] });
 
 // Dummy data for services
 const dummyServices = [
   {
-    _id: '1',
-    title: 'Air Freight',
-    description: 'Discover the best options for air freight. Our team is dedicated to providing exceptional service...',
-    media: '/img/service-6.jpg',
+      _id: '1',
+      title: 'Air Freight',
+      description: 'Discover the best options for air freight. Our team is dedicated to providing exceptional service...',
+      media: '/img/service-6.jpg',
   },
   {
-    _id: '2',
-    title: 'Ocean Freight',
-    description: 'Discover the best options for ocean freight. Our team is dedicated to providing exceptional service...',
-    media: '/img/service-5.jpg',
+      _id: '2',
+      title: 'Ocean Freight',
+      description: 'Discover the best options for ocean freight. Our team is dedicated to providing exceptional service...',
+      media: '/img/service-5.jpg',
   },
   {
-    _id: '3',
-    title: 'Road Freight',
-    description: 'Discover the best options for road freight. Our team is dedicated to providing exceptional service...',
-    media: '/img/service-1.jpg',
+      _id: '3',
+      title: 'Road Freight',
+      description: 'Discover the best options for road freight. Our team is dedicated to providing exceptional service...',
+      media: '/img/service-1.jpg',
   },
   {
-    _id: '4',
-    title: 'Train Freight',
-    description: 'Discover the best options for train freight. Our team is dedicated to providing exceptional service...',
-    media: '/img/service-2.jpg',
+      _id: '4',
+      title: 'Train Freight',
+      description: 'Discover the best options for train freight. Our team is dedicated to providing exceptional service...',
+      media: '/img/service-2.jpg',
   },
   {
-    _id: '5',
-    title: 'Customs Clearance',
-    description: 'Discover the best options for customs clearance. Our team is dedicated to providing exceptional service...',
-    media: '/img/service-3.jpg',
+      _id: '5',
+      title: 'Customs Clearance',
+      description: 'Discover the best options for customs clearance. Our team is dedicated to providing exceptional service...',
+      media: '/img/service-3.jpg',
   },
   {
-    _id: '6',
-    title: 'Warehouse Solutions',
-    description: 'Discover the best options for warehouse solutions. Our team is dedicated to providing exceptional service...',
-    media: '/img/service-4.jpg',
+      _id: '6',
+      title: 'Warehouse Solutions',
+      description: 'Discover the best options for warehouse solutions. Our team is dedicated to providing exceptional service...',
+      media: '/img/service-4.jpg',
   },
 ];
 
-// Generate dynamic metadata for each service
 export async function generateMetadata({ params }) {
   const { id } = params;
   const service = dummyServices.find((s) => s._id === id);
@@ -60,11 +59,64 @@ export async function generateMetadata({ params }) {
     };
   }
 
+  const domain = "https://kuaid.vercel.app"; // Update to kuaid-cargo.com once live
+
   return {
-    title: service.title || 'Service Details',
-    description: service.description || 'Details about the service.',
+    title: service.title,
+    description: service.description,
+    openGraph: {
+      title: service.title,
+      description: service.description,
+      url: `${domain}/service/${id}`,
+      images: [
+        {
+          url: `${domain}${service.media}`,
+          width: 1200,
+          height: 630,
+          alt: service.title,
+        },
+      ],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: service.title,
+      description: service.description,
+      images: [
+        {
+          url: `${domain}${service.media}`,
+          alt: service.title,
+        },
+      ],
+    },
+    // Adding JSON-LD structured data
+    alternates: {
+      canonical: `${domain}/service/${id}`,
+    },
+    additionalMetadata: (
+      <Script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": service.title,
+          "description": service.description,
+          "url": `${domain}/service/${service._id}`,
+          ...(service.media && { "image": `${domain}${service.media}` }), 
+          "provider": {
+            "@type": "Organization",
+            "name": "Kuaid Cargo",
+            "url": domain,
+          },
+        }),
+      }}
+    />
+    ),
   };
 }
+
+
 
 // Server Component
 const ServiceViewer = async ({ params }) => {
