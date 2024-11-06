@@ -6,6 +6,7 @@ import { FaBars, FaTimes, FaHome, FaInfoCircle, FaServicestack, FaPhoneAlt, FaRe
 import { MdVerified, MdVideoCameraFront } from 'react-icons/md';
 import { SiMicrodotblog } from 'react-icons/si';
 import { BsPhoneVibrateFill } from 'react-icons/bs';
+import Image from 'next/image';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -52,28 +53,17 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-gradient-to-r from-blue-500 to-blue-300 shadow-lg z-50">
+    <header className="fixed top-0 left-0 w-full bg-gradient-to-r from-white to-blue-300 shadow-lg z-50">
       <div className="container mx-auto flex justify-between items-center p-4 md:px-8">
-        <Link href="/" className="relative group">
-          <div className="text-2xl text-white flex items-center relative space-x-1">
-            <span
-              ref={kuaidRef}
-              className={`bg-gradient-to-r from-yellow-300 to-gray-200 bg-clip-text text-transparent font-bold text-2xl tracking-wide transition duration-500 ease-in-out ${isKuaidRotating ? 'animate-rotate-pause' : ''}`}
-            >
-              Kuaid-
-            </span>
-            <span
-              ref={cargoRef}
-              className={`bg-gradient-to-r from-yellow-300 to-gray-200 bg-clip-text text-transparent font-bold text-2xl tracking-wide transition duration-500 ease-in-out ${isCargoRotating ? 'animate-rotate-pause-reverse' : ''}`}
-            >
-              Cargo
-            </span>
-          </div>
-
-          {/* Display the verified icon when rotation stops */}
-          {!isKuaidRotating && !isCargoRotating && (
-            <MdVerified size={24} className="absolute top-1/2 transform -translate-y-1/2 left-full ml-2 text-yellow-300 group-hover:opacity-100 transition-opacity duration-300 ease-in-out" />
-          )}
+      <Link href="/" className="relative group flex items-center space-x-2">
+          {/* Logo with Smooth Zooming and Fading Animation */}
+          <Image
+            src="/img/logo.png"
+            alt="Kuaid Logo"
+            width={50}
+            height={50}
+            className="animate-zoom-fade" // Apply custom animation
+          />
         </Link>
 
         {/* Desktop Navigation */}

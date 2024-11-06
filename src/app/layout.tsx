@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     siteName: "Kuaid Cargo",
     images: [
       {
-        url: "https://kuaid.vercel.app/images/service-2.jpg",
+        url: "https://kuaid.vercel.app/img/logo.png",
         width: 1200,
         height: 630,
         alt: "Kuaid Cargo - Freight Forwarding Solutions",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     description: "Top-notch freight forwarding services to streamline logistics and supply chain needs.",
     images: [
       {
-        url: "https://kuaid.vercel.app/img/service-1.jpg",
+        url: "https://kuaid.vercel.app/img/logo.png",
         alt: "Kuaid Cargo - Freight Forwarding Solutions",
       },
     ],
@@ -66,7 +66,7 @@ export default function RootLayout({
               "@type": "Organization",
               "name": "Kuaid Cargo",
               "url": "https://kuaid.vercel.app",
-              "logo": "https://kuaid.vercel.app/service.jpg",
+              "logo": "https://kuaid.vercel.app/img/logo.png",
               "contactPoint": [
                 {
                   "@type": "ContactPoint",

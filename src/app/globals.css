@@ -79,3 +79,19 @@ body {
   display: inline-block; /* ensures the link rotates as a whole */
   animation: rotatePauseReverse 3s ease-in-out;
 }
+
+
+@keyframes zoom-fade {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.4); /* Adjust to your preferred zoom level */
+    opacity:1 ;          /* Adjust to your preferred fade level */
+  }
+}
+
+.animate-zoom-fade {
+  animation: zoom-fade 5s ease-in-out infinite; /* Adjust duration as needed */
+}
