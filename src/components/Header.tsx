@@ -53,7 +53,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-gradient-to-r from-white to-blue-300 shadow-lg z-50">
+    <header className="fixed top-0 left-0 w-full bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg z-50">
       <div className="container mx-auto flex justify-between items-center p-4 md:px-8">
       <Link href="/" className="relative group flex items-center space-x-2">
           {/* Logo with Smooth Zooming and Fading Animation */}

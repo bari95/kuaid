@@ -18,6 +18,9 @@ const spaceMono = Space_Mono({
 export const metadata: Metadata = {
   title: "Freight Forwarding Solutions | Reliable & Efficient",
   description: "Explore top-notch freight forwarding services designed to streamline your logistics and supply chain needs.",
+  icons: {
+    icon: '/favicon.ico',   // Path to favicon
+  },
   openGraph: {
     title: "Freight Forwarding Solutions | Reliable & Efficient",
     description: "Streamline your logistics and supply chain with top-notch freight forwarding services.",
@@ -40,6 +43,7 @@ export const metadata: Metadata = {
     title: "Freight Forwarding Solutions | Reliable & Efficient",
     description: "Top-notch freight forwarding services to streamline logistics and supply chain needs.",
     images: [
+ 
       {
         url: "https://kuaid.vercel.app/img/logo.png",
         alt: "Kuaid Cargo - Freight Forwarding Solutions",
