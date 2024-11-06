@@ -68,31 +68,31 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-8">
-          <Link href="/" className="flex items-center space-x-1 text-white hover:text-yellow-300 transition duration-300">
+          <Link href="/" className="flex items-center space-x-1  hover:text-yellow-300 transition duration-300">
             <FaHome />
             <span>Home</span>
           </Link>
-          <Link href="/about" className="flex items-center space-x-1 text-white hover:text-yellow-300 transition duration-300">
+          <Link href="/about" className="flex items-center space-x-1  hover:text-yellow-300 transition duration-300">
             <FaInfoCircle />
             <span>About</span>
           </Link>
-          <Link href="/services" className="flex items-center space-x-1 text-white hover:text-yellow-300 transition duration-300">
+          <Link href="/services" className="flex items-center space-x-1 hover:text-yellow-300 transition duration-300">
             <FaServicestack />
             <span>Services</span>
           </Link>
-          <Link href="/schedules" className="flex items-center space-x-1 text-white hover:text-yellow-300 transition duration-300">
+          <Link href="/schedules" className="flex items-center space-x-1 hover:text-yellow-300 transition duration-300">
             <FaRegCalendarTimes />
             <span>Ship schedule</span>
           </Link>
-          <Link href="/blogs" className="flex items-center space-x-1 text-white hover:text-yellow-300 transition duration-300">
+          <Link href="/blogs" className="flex items-center space-x-1 hover:text-yellow-300 transition duration-300">
             <SiMicrodotblog />
             <span>Blog</span>
           </Link>
-          <Link href="/videos" className="flex items-center space-x-1 text-white hover:text-yellow-300 transition duration-300">
+          <Link href="/videos" className="flex items-center space-x-1  hover:text-yellow-300 transition duration-300">
             <MdVideoCameraFront />
             <span>Videos</span>
           </Link>
-          <Link href="/contact" className="flex items-center space-x-1 text-white hover:text-yellow-300 transition duration-300">
+          <Link href="/contact" className="flex items-center space-x-1  hover:text-yellow-300 transition duration-300">
             <FaPhoneAlt />
             <span>Contact</span>
           </Link>

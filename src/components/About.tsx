@@ -14,7 +14,7 @@ const merriweather = Merriweather({ subsets: ["latin"], weight: ["300", "400", "
 const About = () => {
   return (
     <div className={`py-4 px-4 lg:px-0 border-left border-red-500 ${merriweather.className}` }>
-      <div className="container mx-auto py-8 px-4 lg:px-0">
+      <div className="container mx-auto py-8 lg:px-0">
         <div className="flex flex-wrap g-5">
           {/* Image Section */}
           
