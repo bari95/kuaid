@@ -2,21 +2,32 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { FaBars, FaTimes, FaHome, FaInfoCircle, FaServicestack, FaPhoneAlt, FaRegCalendarTimes } from 'react-icons/fa';
-import { MdVerified, MdVideoCameraFront } from 'react-icons/md';
+import { MdVideoCameraFront } from 'react-icons/md';
 import { SiMicrodotblog } from 'react-icons/si';
-import { BsPhoneVibrateFill } from 'react-icons/bs';
 import Image from 'next/image';
+import { clsx } from 'clsx';
+
+const navItems = [
+  { href: '/', icon: FaHome, label: 'Home' },
+  { href: '/about', icon: FaInfoCircle, label: 'About' },
+  { href: '/services', icon: FaServicestack, label: 'Services' },
+  { href: '/schedules', icon: FaRegCalendarTimes, label: 'Schedule' },
+  { href: '/blogs', icon: SiMicrodotblog, label: 'Blog' },
+  { href: '/videos', icon: MdVideoCameraFront, label: 'Videos' },
+  { href: '/contact', icon: FaPhoneAlt, label: 'Contact' }
+];
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isKuaidRotating, setIsKuaidRotating] = useState(false);
-  const [isCargoRotating, setIsCargoRotating] = useState(false);
-  const toggleMenu = () => setIsOpen(!isOpen);
-
-  const kuaidRef = useRef<HTMLDivElement>(null);
-  const cargoRef = useRef<HTMLDivElement>(null);
+  const [activeItem, setActiveItem] = useState('/');
+  const { scrollY } = useScroll();
+  
+  const headerOpacity = useTransform(scrollY, [0, 100], [0.95, 1]);
+  const headerBlur = useTransform(scrollY, [0, 100], [8, 20]);
+  const logoScale = useTransform(scrollY, [0, 100], [1, 0.9]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,187 +38,313 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    let rotationTimeout: ReturnType<typeof setTimeout>;
-
-    const triggerRotation = () => {
-      setIsKuaidRotating(true);
-      setIsCargoRotating(true);
-
-      if (kuaidRef.current) {
-        kuaidRef.current.classList.remove('animate-rotate-pause-reverse');
-        void kuaidRef.current.offsetWidth;
-        kuaidRef.current.classList.add('animate-rotate-pause-reverse');
-      }
-      if (cargoRef.current) {
-        cargoRef.current.classList.remove('animate-rotate-pause');
-        void cargoRef.current.offsetWidth;
-        cargoRef.current.classList.add('animate-rotate-pause');
-      }
-
-      // Stop rotation after 4 seconds
-      setTimeout(() => {
-        setIsKuaidRotating(false);
-        setIsCargoRotating(false);
-      }, 4000);
-
-      // Set up next rotation after 7 seconds
-      rotationTimeout = setTimeout(triggerRotation, 7000);
-    };
-
-    // Start initial rotation
-    triggerRotation();
-
-    // Clean up timeouts on component unmount
-    return () => clearTimeout(rotationTimeout);
-  }, []);
+  const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-sky-100' 
-        : 'bg-gradient-to-r from-sky-50 via-blue-50 to-cyan-50 shadow-md'
-    }`}>
-      <div className="container mx-auto flex justify-between items-center p-4 md:px-8">
-        <Link href="/" className="relative group flex items-center space-x-3">
-          {/* Enhanced Logo with Glow Effect */}
-          <div className="relative">
-            <div className="absolute -inset-2 bg-gradient-to-r from-sky-400 to-blue-500 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-300 blur-sm"></div>
-            <Image
-              src="/img/logo.png"
-              alt="Kuaid Logo"
-              width={50}
-              height={50}
-              className="relative animate-zoom-fade rounded-full ring-2 ring-sky-200 group-hover:ring-sky-300 transition-all duration-300"
-            />
-          </div>
-          
-          {/* Company Name */}
-          <div className="hidden sm:block">
-            <h1 className={`text-xl font-bold bg-gradient-to-r from-sky-600 to-blue-700 bg-clip-text text-transparent transition-colors duration-300 ${
-              isScrolled ? 'from-sky-700 to-blue-800' : ''
-            }`}>
-              Kuaid
-            </h1>
-            <p className="text-xs text-sky-500 font-medium">Cargo Solutions</p>
-          </div>
-        </Link>
+    <>
+      {/* Glassmorphism Header */}
+      <motion.header
+        style={{
+          backdropFilter: `blur(${headerBlur}px)`,
+          opacity: headerOpacity,
+        }}
+        className={clsx(
+          "fixed top-0 left-0 w-full z-50 transition-all duration-500",
+          isScrolled 
+            ? "bg-gradient-to-r from-sky-50/80 via-blue-50/80 to-cyan-50/80 shadow-2xl border-b border-sky-200/30" 
+            : "bg-gradient-to-r from-sky-100/60 via-blue-100/60 to-cyan-100/60 shadow-lg"
+        )}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        {/* Animated Background Gradient */}
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-r from-sky-400/10 via-blue-400/10 to-cyan-400/10"
+          animate={{
+            background: [
+              "linear-gradient(90deg, rgba(56,189,248,0.1) 0%, rgba(59,130,246,0.1) 50%, rgba(34,211,238,0.1) 100%)",
+              "linear-gradient(90deg, rgba(34,211,238,0.1) 0%, rgba(56,189,248,0.1) 50%, rgba(59,130,246,0.1) 100%)",
+              "linear-gradient(90deg, rgba(59,130,246,0.1) 0%, rgba(34,211,238,0.1) 50%, rgba(56,189,248,0.1) 100%)"
+            ]
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+        />
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-2">
-          {[
-            { href: '/', icon: FaHome, label: 'Home' },
-            { href: '/about', icon: FaInfoCircle, label: 'About' },
-            { href: '/services', icon: FaServicestack, label: 'Services' },
-            { href: '/schedules', icon: FaRegCalendarTimes, label: 'Schedule' },
-            { href: '/blogs', icon: SiMicrodotblog, label: 'Blog' },
-            { href: '/videos', icon: MdVideoCameraFront, label: 'Videos' },
-            { href: '/contact', icon: FaPhoneAlt, label: 'Contact' }
-          ].map(({ href, icon: Icon, label }) => (
-            <Link 
-              key={href}
-              href={href} 
-              className={`group relative flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
-                isScrolled
-                  ? 'text-slate-700 hover:text-sky-600 hover:bg-sky-50'
-                  : 'text-slate-600 hover:text-sky-700 hover:bg-white/60'
-              }`}
+        <div className="container mx-auto flex justify-between items-center p-4 md:px-8 relative z-10">
+          {/* Enhanced Logo Section */}
+          <Link href="/" className="group flex items-center space-x-4">
+            <motion.div
+              style={{ scale: logoScale }}
+              className="relative"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
             >
-              {/* Hover Background */}
-              <div className="absolute inset-0 bg-gradient-to-r from-sky-100 to-blue-100 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              
-              {/* Icon and Text */}
-              <Icon className="relative z-10 text-sm group-hover:scale-110 transition-transform duration-200" />
-              <span className="relative z-10 text-sm font-medium">{label}</span>
-              
-              {/* Underline Effect */}
-              <div className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-sky-400 to-blue-500 group-hover:w-full group-hover:left-0 transition-all duration-300 rounded-full"></div>
-            </Link>
-          ))}
-        </nav>
-
-        {/* Mobile Menu Button */}
-        <button
-          className={`md:hidden relative p-2 rounded-full transition-all duration-300 ${
-            isScrolled
-              ? 'text-slate-700 hover:bg-sky-50'
-              : 'text-slate-600 hover:bg-white/60'
-          }`}
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-        >
-          <div className="relative">
-            {isOpen ? <FaTimes className="text-xl" /> : <FaBars className="text-xl" />}
-          </div>
-        </button>
-      </div>
-
-      {/* Enhanced Mobile Menu */}
-      <div className={`md:hidden absolute top-full left-0 w-full transition-all duration-300 transform ${
-        isOpen 
-          ? 'opacity-100 translate-y-0' 
-          : 'opacity-0 -translate-y-2 pointer-events-none'
-      }`}>
-        <div className="bg-white/95 backdrop-blur-md border-b border-sky-100 shadow-lg">
-          <nav className="container mx-auto py-4">
-            {[
-              { href: '/', icon: FaHome, label: 'Home' },
-              { href: '/about', icon: FaInfoCircle, label: 'About' },
-              { href: '/services', icon: FaServicestack, label: 'Services' },
-              { href: '/schedules', icon: FaRegCalendarTimes, label: 'Ship Schedule' },
-              { href: '/blogs', icon: SiMicrodotblog, label: 'Blog' },
-              { href: '/videos', icon: MdVideoCameraFront, label: 'Videos' },
-              { href: '/contact', icon: FaPhoneAlt, label: 'Contact' }
-            ].map(({ href, icon: Icon, label }, index) => (
-              <Link 
-                key={href}
-                href={href} 
-                onClick={toggleMenu} 
-                className="group flex items-center space-x-3 px-6 py-3 text-slate-700 hover:text-sky-600 hover:bg-sky-50 transition-all duration-200 border-l-4 border-transparent hover:border-sky-400"
-                style={{ 
-                  animationDelay: `${index * 50}ms`,
-                  animation: isOpen ? 'slideInLeft 0.3s ease-out forwards' : 'none'
+              {/* Animated Glow Ring */}
+              <motion.div
+                className="absolute -inset-3 rounded-full bg-gradient-to-r from-sky-400 via-blue-500 to-cyan-400 opacity-0 group-hover:opacity-30 blur-md"
+                animate={{
+                  rotate: [0, 360],
+                  scale: [1, 1.1, 1]
                 }}
+                transition={{
+                  rotate: { duration: 8, repeat: Infinity, ease: "linear" },
+                  scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+                }}
+              />
+              
+              {/* Logo with Premium Border */}
+              <motion.div
+                className="relative p-1 rounded-full bg-gradient-to-r from-sky-200 to-blue-200"
+                whileHover={{ rotate: 5 }}
+                transition={{ type: "spring", stiffness: 300 }}
               >
-                <Icon className="text-lg group-hover:scale-110 transition-transform duration-200" />
-                <span className="font-medium">{label}</span>
-                <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                  <div className="w-2 h-2 bg-sky-400 rounded-full"></div>
-                </div>
-              </Link>
+                <Image
+                  src="/img/logo.png"
+                  alt="Kuaid Logo"
+                  width={48}
+                  height={48}
+                  className="rounded-full bg-white p-1 shadow-lg"
+                />
+              </motion.div>
+            </motion.div>
+            
+            {/* Brand Text with Typewriter Effect */}
+            <motion.div
+              className="hidden sm:block"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+            >
+              <motion.h1
+                className="text-2xl font-extrabold bg-gradient-to-r from-sky-600 via-blue-700 to-cyan-600 bg-clip-text text-transparent"
+                animate={{
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
+                }}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                style={{ backgroundSize: "200% 200%" }}
+              >
+                Kuaid
+              </motion.h1>
+              <motion.p
+                className="text-xs font-semibold text-sky-600 tracking-wider"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8 }}
+              >
+                PREMIUM CARGO SOLUTIONS
+              </motion.p>
+            </motion.div>
+          </Link>
+
+          {/* Desktop Navigation with Magnetic Effect */}
+          <nav className="hidden md:flex items-center space-x-1">
+            {navItems.map(({ href, icon: Icon, label }, index) => (
+              <motion.div
+                key={href}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+              >
+                <Link href={href}>
+                  <motion.div
+                    className={clsx(
+                      "group relative flex items-center space-x-2 px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer",
+                      activeItem === href
+                        ? "bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-lg"
+                        : "text-slate-700 hover:text-sky-600"
+                    )}
+                    whileHover={{ 
+                      scale: 1.05,
+                      y: -2,
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    onHoverStart={() => setActiveItem(href)}
+                    onHoverEnd={() => setActiveItem('/')}
+                  >
+                    {/* Hover Background */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-sky-100 via-blue-100 to-cyan-100 rounded-2xl opacity-0"
+                      whileHover={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    
+                    {/* Floating Particles */}
+                    <motion.div
+                      className="absolute inset-0 rounded-2xl overflow-hidden"
+                      whileHover="hover"
+                    >
+                      {[...Array(3)].map((_, i) => (
+                        <motion.div
+                          key={i}
+                          className="absolute w-1 h-1 bg-sky-400 rounded-full opacity-0"
+                          variants={{
+                            hover: {
+                              opacity: [0, 1, 0],
+                              y: [0, -20],
+                              x: [0, Math.random() * 20 - 10],
+                            }
+                          }}
+                          transition={{
+                            duration: 1.5,
+                            delay: i * 0.2,
+                            repeat: Infinity,
+                          }}
+                          style={{
+                            left: `${20 + i * 30}%`,
+                            bottom: "20%"
+                          }}
+                        />
+                      ))}
+                    </motion.div>
+                    
+                    <Icon className="relative z-10 text-sm" />
+                    <span className="relative z-10 text-sm font-semibold tracking-wide">{label}</span>
+                    
+                    {/* Magnetic Orb */}
+                    <motion.div
+                      className="absolute -right-1 -top-1 w-2 h-2 bg-gradient-to-r from-sky-400 to-blue-500 rounded-full opacity-0"
+                      whileHover={{ 
+                        opacity: 1,
+                        scale: [1, 1.5, 1],
+                      }}
+                      transition={{ 
+                        scale: { duration: 1, repeat: Infinity },
+                        opacity: { duration: 0.3 }
+                      }}
+                    />
+                  </motion.div>
+                </Link>
+              </motion.div>
             ))}
           </nav>
-        </div>
-      </div>
 
-      {/* Custom Styles */}
-      <style jsx>{`
-        @keyframes slideInLeft {
-          from {
-            opacity: 0;
-            transform: translateX(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-        
-        @keyframes zoom-fade {
-          0%, 100% { 
-            transform: scale(1); 
-            opacity: 1; 
-          }
-          50% { 
-            transform: scale(1.05); 
-            opacity: 0.8; 
-          }
-        }
-        
-        .animate-zoom-fade {
-          animation: zoom-fade 3s ease-in-out infinite;
-        }
-      `}</style>
-    </header>
+          {/* Futuristic Mobile Menu Button */}
+          <motion.button
+            className="md:hidden relative p-3 rounded-2xl bg-gradient-to-r from-sky-100 to-blue-100 text-slate-700 shadow-lg"
+            onClick={toggleMenu}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            aria-label="Toggle menu"
+          >
+            <motion.div
+              animate={{ rotate: isOpen ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {isOpen ? <FaTimes className="text-lg" /> : <FaBars className="text-lg" />}
+            </motion.div>
+            
+            {/* Pulsing Ring */}
+            <motion.div
+              className="absolute inset-0 rounded-2xl border-2 border-sky-400 opacity-0"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0, 0.5, 0]
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+          </motion.button>
+        </div>
+      </motion.header>
+
+      {/* Premium Mobile Menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="fixed inset-0 z-40 md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {/* Backdrop */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-br from-sky-900/20 via-blue-900/20 to-cyan-900/20 backdrop-blur-xl"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={toggleMenu}
+            />
+            
+            {/* Menu Panel */}
+            <motion.div
+              className="absolute top-20 left-4 right-4 bg-white/95 backdrop-blur-2xl rounded-3xl shadow-2xl border border-sky-200/50 overflow-hidden"
+              initial={{ scale: 0.8, opacity: 0, y: -50 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.8, opacity: 0, y: -50 }}
+              transition={{ 
+                type: "spring", 
+                stiffness: 300, 
+                damping: 30 
+              }}
+            >
+              {/* Menu Header */}
+              <div className="p-6 bg-gradient-to-r from-sky-50 to-blue-50 border-b border-sky-200/30">
+                <h3 className="text-lg font-bold text-slate-700">Navigation</h3>
+                <div className="mt-2 w-12 h-1 bg-gradient-to-r from-sky-400 to-blue-500 rounded-full" />
+              </div>
+              
+              {/* Menu Items */}
+              <nav className="p-4">
+                {navItems.map(({ href, icon: Icon, label }, index) => (
+                  <motion.div
+                    key={href}
+                    initial={{ opacity: 0, x: -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ 
+                      delay: index * 0.1,
+                      duration: 0.5,
+                      type: "spring",
+                      stiffness: 200
+                    }}
+                  >
+                    <Link href={href} onClick={toggleMenu}>
+                      <motion.div
+                        className="group flex items-center space-x-4 p-4 rounded-2xl mb-2 transition-all duration-300 hover:bg-gradient-to-r hover:from-sky-50 hover:to-blue-50 border-l-4 border-transparent hover:border-sky-400"
+                        whileHover={{ x: 10, scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <motion.div
+                          className="p-2 rounded-xl bg-gradient-to-r from-sky-100 to-blue-100 text-sky-600 group-hover:from-sky-200 group-hover:to-blue-200"
+                          whileHover={{ rotate: 5 }}
+                        >
+                          <Icon className="text-lg" />
+                        </motion.div>
+                        
+                        <div className="flex-1">
+                          <span className="font-semibold text-slate-700 group-hover:text-sky-700">
+                            {label}
+                          </span>
+                        </div>
+                        
+                        <motion.div
+                          className="w-2 h-2 rounded-full bg-sky-400 opacity-0 group-hover:opacity-100"
+                          whileHover={{ scale: 1.5 }}
+                        />
+                      </motion.div>
+                    </Link>
+                  </motion.div>
+                ))}
+              </nav>
+              
+              {/* Menu Footer */}
+              <div className="p-6 bg-gradient-to-r from-sky-50 to-blue-50 border-t border-sky-200/30">
+                <motion.div
+                  className="flex items-center justify-center space-x-2 text-sm text-sky-600"
+                  animate={{
+                    opacity: [0.5, 1, 0.5]
+                  }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  <div className="w-2 h-2 bg-sky-400 rounded-full" />
+                  <span className="font-medium">Premium Navigation</span>
+                  <div className="w-2 h-2 bg-blue-400 rounded-full" />
+                </motion.div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
